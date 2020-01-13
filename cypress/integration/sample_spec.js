@@ -9,7 +9,7 @@ describe('first test', function(){
 })
 
 describe('adding, finishing and clearing todos', function(){
-    it('adds 6 items and finishes two of them', function(){
+    it('adds 6 todos', function(){
         cy.visit('http://localhost:8888/')
         cy.get('.new-todo').type('1 todo {enter}')
         cy.get('.new-todo').type('2 todo {enter}')
@@ -18,10 +18,14 @@ describe('adding, finishing and clearing todos', function(){
         cy.get('.new-todo').type('5 todo {enter}')
         cy.get('.new-todo').type('6 todo {enter}')
         cy.get('.todo-list li').should('have.length', 6)
+    })
 
+    it('completes two todos', function(){
         cy.get('.todo-list li').eq(0).find('.toggle').check()
         cy.get('.todo-list li').eq(5).find('.toggle').check()
+    })
 
+    it('clears completed todos', function(){
         cy.get('.clear-completed').should('be.visible')
         cy.get('.clear-completed').click()
         cy.get('.clear-completed').should('not.be.visible')
